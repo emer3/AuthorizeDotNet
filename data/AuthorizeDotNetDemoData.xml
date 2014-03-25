@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This Work is in the public domain and is provided on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,
+including, without limitation, any warranties or conditions of TITLE,
+NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
+You are solely responsible for determining the appropriateness of using
+this Work and assume any risks associated with your use of this Work.
+
+This Work includes contributions authored by David E. Jones, not as a
+"work for hire", who hereby disclaims any copyright to the same.
+-->
+<entity-facade-xml type="demo">
+    <!-- ========== Authorize.Net AIM Settings ========== -->
+    <!-- For API details, including configuration related values, see: http://developer.authorize.net/api/aim/ -->
+
+    <mantle.account.method.PaymentGatewayConfig paymentGatewayConfigId="AuthorizeDotNetAimDemo"
+            paymentGatewayTypeEnumId="PgtAuthorizeDotNet" description="Authorize.Net Demo Config"
+            authorizeServiceName="AuthorizeDotNet.AimPaymentServices.authorize#Payment"
+            captureServiceName="AuthorizeDotNet.AimPaymentServices.capture#Payment"
+            releaseServiceName="AuthorizeDotNet.AimPaymentServices.release#Payment"
+            refundServiceName="AuthorizeDotNet.AimPaymentServices.refund#Payment"/>
+    <!-- config for authorize and capture right away, no deferred capture:
+    <mantle.account.method.PaymentGatewayConfig paymentGatewayConfigId="AuthorizeDotNetAimDemo"
+            paymentGatewayTypeEnumId="PgtAuthorizeDotNet" description="Authorize.Net Demo Config"
+            authorizeServiceName="AuthorizeDotNet.AimPaymentServices.authorizeAndCapture#Payment"
+            captureServiceName=""
+            releaseServiceName="AuthorizeDotNet.AimPaymentServices.release#Payment"
+            refundServiceName="AuthorizeDotNet.AimPaymentServices.refund#Payment"/>
+    -->
+
+    <!-- for production use: transactionUrl="https://secure.authorize.net/gateway/transact.dll" -->
+    <AuthorizeDotNet.PaymentGatewayAuthorizeNet paymentGatewayConfigId="AuthorizeDotNetAimDemo"
+            transactionUrl="https://test.authorize.net/gateway/transact.dll"
+            login="" tranKey="" apiVersion="3.1" duplicateWindow="120"
+            testRequest="TRUE" emailCustomer="FALSE" emailMerchant="FALSE"/>
+
+    <!-- to set this payment gateway on a product store add a record like:
+    <mantle.product.store.ProductStorePaymentGateway productStoreId="POPC_DEFAULT"
+            paymentMethodTypeEnumId="PmtCreditCard" paymentGatewayConfigId="AuthorizeDotNetAimDemo"/>
+    -->
+
+    <!-- ========== Authorize.Net CIM Settings ========== -->
+    <!-- For API details, including configuration related values, see: http://developer.authorize.net/api/cim/ -->
+
+    <mantle.account.method.PaymentGatewayConfig paymentGatewayConfigId="AuthorizeDotNetCimDemo"
+            paymentGatewayTypeEnumId="PgtAuthorizeDotNet" description="Authorize.Net Demo Config"
+            authorizeServiceName="AuthorizeDotNet.CimPaymentServices.authorize#Payment"
+            captureServiceName="AuthorizeDotNet.CimPaymentServices.capture#Payment"
+            releaseServiceName="AuthorizeDotNet.CimPaymentServices.release#Payment"
+            refundServiceName="AuthorizeDotNet.CimPaymentServices.refund#Payment"/>
+    <!-- config for authorize and capture right away, no deferred capture:
+    <mantle.account.method.PaymentGatewayConfig paymentGatewayConfigId="AuthorizeDotNetCimDemo"
+           paymentGatewayTypeEnumId="PgtAuthorizeDotNet" description="Authorize.Net Demo Config"
+           authorizeServiceName="AuthorizeDotNet.CimPaymentServices.authorizeAndCapture#Payment"
+           captureServiceName=""
+           releaseServiceName="AuthorizeDotNet.CimPaymentServices.release#Payment"
+           refundServiceName="AuthorizeDotNet.CimPaymentServices.refund#Payment"/>
+    -->
+
+    <!-- for production use: https://api.authorize.net/xml/v1/request.api -->
+    <!-- for production validationMode should be "liveMode" or for more extensive validation "testMode", see AuthorizeNet_CIM_XML_guide.pdf for details -->
+    <AuthorizeDotNet.PaymentGatewayAuthorizeNet paymentGatewayConfigId="AuthorizeDotNetCimDemo"
+            transactionUrl="https://apitest.authorize.net/xml/v1/request.api"
+            login="" tranKey="" apiVersion="1" validationMode="none"/>
+
+    <!-- to set this payment gateway on a product store add a record like:
+    <mantle.product.store.ProductStorePaymentGateway productStoreId="POPC_DEFAULT"
+            paymentMethodTypeEnumId="PmtCreditCard" paymentGatewayConfigId="AuthorizeDotNetCimDemo"/>
+    -->
+
+    <!-- these are the global settings for CIM since it is system-wide and not store-specific -->
+    <moqui.security.UserGroupPreference userGroupId="ALL_USERS" preferenceKey="AuthorizeNetCimEnabled" preferenceValue="false"/>
+    <moqui.security.UserGroupPreference userGroupId="ALL_USERS" preferenceKey="AuthorizeNetCimPaymentGatewayConfigId"
+            preferenceValue="AuthorizeDotNetCimDemo"/>
+</entity-facade-xml>

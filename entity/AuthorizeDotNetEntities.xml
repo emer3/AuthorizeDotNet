@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This Work is in the public domain and is provided on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,
+including, without limitation, any warranties or conditions of TITLE,
+NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
+You are solely responsible for determining the appropriateness of using
+this Work and assume any risks associated with your use of this Work.
+
+This Work includes contributions authored by David E. Jones, not as a
+"work for hire", who hereby disclaims any copyright to the same.
+-->
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-1.4.xsd">
+
+    <extend-entity entity-name="Party" package-name="mantle.party">
+        <field name="authorizeNetCimId" type="id"/>
+    </extend-entity>
+    <extend-entity entity-name="PaymentMethod" package-name="mantle.account.method">
+        <field name="authorizeNetCimId" type="id"/>
+    </extend-entity>
+    <!-- may support this at some point in the future for shipping addresses:
+    <extend-entity entity-name="ContactMech" package-name="mantle.party.contact">
+        <field name="authorizeNetCimId" type="id"/>
+    </extend-entity>
+    -->
+
+    <entity entity-name="PaymentGatewayAuthorizeNet" package-name="AuthorizeDotNet">
+        <field name="paymentGatewayConfigId" type="id" is-pk="true"/>
+
+        <field name="transactionUrl" type="text-medium"><description>Transaction URL</description></field>
+        <field name="certificateAlias" type="text-medium"><description>Certificate Alias</description></field>
+
+        <field name="login" type="text-medium" encrypt="true"><description>Authorize.Net API login (username)</description></field>
+        <field name="tranKey" type="text-medium" encrypt="true"><description>Transaction Key</description></field>
+
+        <field name="apiVersion" type="text-short"><description>Target Authorize.Net API version</description></field>
+        <!-- don't need these for now, testing and maybe more dev needed for card present:
+        <field name="cpVersion" type="text-short"><description>Card Present Version</description></field>
+        <field name="cpMarketType" type="text-short"><description>Card Present Market Type</description></field>
+        <field name="cpDeviceType" type="text-short"><description>Card Present Device Type</description></field>
+        -->
+        <field name="duplicateWindow" type="number-integer">
+            <description>Check the duplicate transaction in the specified time duration which is specified in seconds.
+                If duplicate transaction occurs in the defined time limit then return error.</description></field>
+
+        <field name="testRequest" type="text-short">
+            <description>Test Request (for AIM requests)? - forces the url property to the test url and adds more logging info to the logs (TRUE|FALSE)</description></field>
+
+        <field name="emailCustomer" type="text-short">
+            <description>Email Customer? - if should send an email to the customer for each transaction (TRUE|FALSE)</description></field>
+        <field name="emailMerchant" type="text-short">
+            <description>Email Merchant? - if should send email to the merchant for each transaction (TRUE|FALSE)</description></field>
+
+        <field name="validationMode" type="text-short">
+            <description>Validation Mode for CIM requests. Can be none, testMode, or liveMode.</description></field>
+
+        <relationship type="one" related-entity-name="mantle.account.method.PaymentGatewayConfig"/>
+        <seed-data>
+            <moqui.basic.Enumeration description="Authorize.Net Gateway" enumId="PgtAuthorizeDotNet" enumTypeId="PaymentGatewayType"/>
+        </seed-data>
+    </entity>
+</entities>
