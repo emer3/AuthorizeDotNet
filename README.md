@@ -1,7 +1,7 @@
 AuthorizeDotNet
 ===============
 
-Moqui component for Authorize.Net AIM and CIM integrations that tie into Mantle payment processing.
+Moqui component for Authorize.Net AIM and CIM integrations that tie into Mantle payment processing and CIM integration to tokenize credit card information.
 
 To use simply:
 
