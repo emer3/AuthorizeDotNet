@@ -164,7 +164,6 @@ This Work includes contributions authored by David E. Jones, not as a
         </actions>
     </service>
 
-    <!-- TODO: need a trigger for this service, ie for a delete#CreditCard in PaymentMethodServices -->
     <service verb="delete" noun="CustomerPaymentMethod">
         <in-parameters><parameter name="paymentMethodId"/></in-parameters>
         <actions>
@@ -187,10 +186,10 @@ This Work includes contributions authored by David E. Jones, not as a
                 <set field="responseString" from="org.moqui.impl.StupidWebUtilities.simpleHttpStringRequest(pgan.transactionUrl, requestString, 'text/xml')"/>
                 <set field="responseNode" from="new XmlParser().parseText(responseString)"/>
 
-                <if condition="responseNode.messages.resultCode != 'Ok'">
+                <if condition="responseNode.messages.resultCode.text() != 'Ok'">
                     <!-- TODO: should probably do something else on error... but what? -->
-                    <log level="error" message="Error saving Authorize.Net CIM info for PaymentMethod [${paymentMethodId}]: ${responseString}"/>
-                    <return/>
+                    <log level="error" message="Error deleting Authorize.Net CIM info for PaymentMethod [${paymentMethodId}]: ${responseString}"/>
+                    <return error="true" message="Could not delete payment method [${paymentMethodId}] information: ${responseNode.messages.message?.getAt(0)?.text?.text()}"/>
                 </if>
                 <!-- TODO: need to do anything on a Ok result? -->
             </if>
