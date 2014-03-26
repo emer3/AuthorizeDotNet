@@ -55,9 +55,9 @@ This Work includes contributions authored by David E. Jones, not as a
 </createCustomerProfileTransactionRequest>
             """]]></script>
 
-            <log level="info" message="========== authorize#Payment requestString: \n${requestString}"/>
+            <!-- <log level="info" message="========== CimPaymentServices.authorize#Payment requestString: \n${requestString}"/> -->
             <set field="responseString" from="org.moqui.impl.StupidWebUtilities.simpleHttpStringRequest(pgan.transactionUrl, requestString, 'text/xml')"/>
-            <log level="info" message="========== authorize#Payment responseString: \n${responseString}"/>
+            <log level="info" message="CimPaymentServices.authorize#Payment responseString: \n${responseString}"/>
             <set field="responseNode" from="new XmlParser().parseText(responseString)"/>
 
             <if condition="responseNode.directResponse">
@@ -108,9 +108,9 @@ This Work includes contributions authored by David E. Jones, not as a
 </createCustomerProfileTransactionRequest>
             """]]></script>
 
-            <log level="info" message="========== capture#Payment requestString: \n${requestString}"/>
+            <!-- <log level="info" message="========== CimPaymentServices.capture#Payment requestString: \n${requestString}"/> -->
             <set field="responseString" from="org.moqui.impl.StupidWebUtilities.simpleHttpStringRequest(pgan.transactionUrl, requestString, 'text/xml')"/>
-            <log level="info" message="========== capture#Payment responseString: \n${responseString}"/>
+            <log level="info" message="CimPaymentServices.capture#Payment responseString: \n${responseString}"/>
             <set field="responseNode" from="new XmlParser().parseText(responseString)"/>
 
             <if condition="responseNode.directResponse">

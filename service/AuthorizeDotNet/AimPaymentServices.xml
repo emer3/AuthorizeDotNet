@@ -174,8 +174,8 @@ This Work includes contributions authored by David E. Jones, not as a
             <parameter name="paymentGatewayResponseId"/>
         </out-parameters>
         <actions>
-            <!-- TODO: REMOVE THIS BEFORE COMMIT! will contain sensitive information: -->
-            <log level="warn" message="=========== send#AimRequest requestMap=${requestMap}"/>
+            <!-- NOTE: ALWAYS REMOVE THIS BEFORE COMMIT! will contain sensitive information: -->
+            <!-- <log level="warn" message="=========== send#AimRequest requestMap=${requestMap}"/> -->
 
             <entity-find-one entity-name="AuthorizeDotNet.PaymentGatewayAuthorizeNet" value-field="pgan"/>
 

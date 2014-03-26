@@ -116,9 +116,9 @@ This Work includes contributions authored by David E. Jones, not as a
                 </else>
             </if>
 
-            <log level="info" message="========== store#CustomerPaymentMethod requestString: \n${requestString}"/>
+            <!-- <log level="info" message="========== store#CustomerPaymentMethod requestString: \n${requestString}"/> -->
             <set field="responseString" from="org.moqui.impl.StupidWebUtilities.simpleHttpStringRequest(pgan.transactionUrl, requestString, 'text/xml')"/>
-            <log level="info" message="========== store#CustomerPaymentMethod responseString: \n${responseString}"/>
+            <log level="info" message="store#CustomerPaymentMethod responseString: \n${responseString}"/>
 
             <set field="responseNode" from="new XmlParser().parseText(responseString)"/>
 
