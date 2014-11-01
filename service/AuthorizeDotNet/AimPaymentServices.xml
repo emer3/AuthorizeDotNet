@@ -221,7 +221,7 @@ This Work includes contributions authored by David E. Jones, not as a
                 final int CvResultCode = 38
             </script>
             <set field="responseList" from="responseString.split(delimeter, -1) as List"/>
-            <log level="warn" message="=========== save#AimResponse responseList=${responseList}"/>
+            <!-- <log level="warn" message="=========== save#AimResponse responseList=${responseList}"/> -->
 
             <entity-find-one entity-name="mantle.account.payment.Payment" value-field="payment"/>
             <if condition="payment &amp;&amp; !paymentMethodId"><set field="paymentMethodId" from="payment.paymentMethodId"/></if>
