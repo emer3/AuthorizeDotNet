@@ -30,7 +30,8 @@ along with this software (see the LICENSE.md file). If not, see
             refundServiceName="AuthorizeDotNet.AimPaymentServices.refund#Payment"/>
     -->
 
-    <!-- for production use: transactionUrl="https://secure.authorize.net/gateway/transact.dll" -->
+    <!-- for production set transactionUrl to: https://secure.authorize.net/gateway/transact.dll
+        OR the new URL for the Akamai based network: https://secure2.authorize.net/gateway/transact.dll -->
     <AuthorizeDotNet.PaymentGatewayAuthorizeNet paymentGatewayConfigId="AuthorizeDotNetAimDemo"
             transactionUrl="https://test.authorize.net/gateway/transact.dll"
             login="" tranKey="" apiVersion="3.1" duplicateWindow="120"
@@ -59,7 +60,8 @@ along with this software (see the LICENSE.md file). If not, see
            refundServiceName="AuthorizeDotNet.CimPaymentServices.refund#Payment"/>
     -->
 
-    <!-- for production use: https://api.authorize.net/xml/v1/request.api -->
+    <!-- for production set transactionUrl to: https://api.authorize.net/xml/v1/request.api
+        OR the new URL for the Akamai based network: https://api2.authorize.net/xml/v1/request.api -->
     <!-- for production validationMode should be "liveMode" or for more extensive validation "testMode", see AuthorizeNet_CIM_XML_guide.pdf for details -->
     <AuthorizeDotNet.PaymentGatewayAuthorizeNet paymentGatewayConfigId="AuthorizeDotNetCimDemo"
             transactionUrl="https://apitest.authorize.net/xml/v1/request.api"
